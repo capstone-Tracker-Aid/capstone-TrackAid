@@ -1,8 +1,6 @@
 import styles from './invoice.module.css'
-const Invoice = ({formData,handleForm, setShowInvoice, handleDownload}) =>{ 
-    //  const handleOpenPreview = () => {
-    //     setShowInvoice(true);
-    //   };
+const Invoice = ({formData,handleForm, setShowInvoice, handleDownload,calculateAmt,handleSubmit,list}) =>{ 
+  
      return (
          <>
           <div className={styles.invoice}>
@@ -58,15 +56,28 @@ const Invoice = ({formData,handleForm, setShowInvoice, handleDownload}) =>{
                                 <p>Amount</p>
                             </div>
                         </div>
-                    <div className={styles.itemQuantity}>
-                            <div>
-                                <textarea rows='3' cols='60' onChange={handleForm} name='item' value={formData.item}>Description of service or product..</textarea>
-                                <button className={styles.lineBtn}>Line Item</button>
+                        <form onSubmit={handleSubmit}>
+                            <div className={styles.itemQuantity}>
+                                <div>
+                                    <textarea rows='3' cols='60' onChange={handleForm} name='item' value={formData.item}>Description of service or product..</textarea>
+                                    <button type='submit' className={styles.lineBtn}>Add Item</button>
+                                   <div style={{backgroundColor:'red'}}>
+                                    {
+                                        list?.map((item)=>{
+                                            <ul key={item.id}>
+                                                <li>{item.item}</li>
+                                                <li>{item.quantity}</li>
+                                                <li>{item.amt}</li>
+                                            </ul>
+                                        })
+                                    }
+                                   </div>
+                                </div>
+                                <input type='text' placeholder='1' onChange={handleForm} name='quantity' value={formData.quantity}/>
+                                <input type='text' placeholder='$  0' onChange={handleForm} name='rate' value={formData.rate}/>
+                                <p className={styles.amount}>{`$ ${calculateAmt()}` }</p>
                             </div>
-                            <input type='text' placeholder='1' onChange={handleForm} name='quantity' value={formData.quantity}/>
-                            <input type='text' placeholder='$  0' onChange={handleForm} name='rate' value={formData.rate}/>
-                            <p className={styles.amount}>$0.00 </p>
-                    </div>
+                        </form>
                     <div className={styles.notes}>
                             <div> <p>Notes</p>
                                 <textarea rows='3' cols='65' onChange={handleForm} name='notes' value={formData.notes}>Note any relevant information not already covered</textarea>
@@ -87,10 +98,9 @@ const Invoice = ({formData,handleForm, setShowInvoice, handleDownload}) =>{
                     </div>
                     <div className={styles.columRight}>
                         <button className={styles.invoiceBtn}>Send invoice</button>
-                        <p onClick={handleDownload}  className={styles.download
-                        }>Download invoice</p>
+                        <p onClick={handleDownload}  className={styles.download}>Download invoice</p>
                         <p>Currency:USD</p>
-                        <p  className={styles.save} onClick={()=>setShowInvoice(true)}>Save Template</p>
+                        <p  className={styles.save} onClick={()=> setShowInvoice(true)}>Save Template</p>
                         <hr/>
                         <p>My Invoice </p>
                     </div>
@@ -181,7 +191,7 @@ export const PreviewInvoice = ({formData,setShowInvoice,handleDownload})=>{
                 </div>
                 <div className={styles.btns}>
                     <button  onClick={ ()=> setShowInvoice(false)} className={styles.lineBtn}> Edit invoice</button>
-                    <button  onClick={handleDownload()} className={styles.lineBtn}>Download invoice</button>
+                    <button  onClick={handleDownload} className={styles.lineBtn}>Download invoice</button>
                 </div>
             </div>
         </> 
