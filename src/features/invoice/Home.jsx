@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Invoice from './invoice.jsx';
-import {PreviewInvoice} from './invoice.jsx';
+import { PreviewInvoice } from './invoice.jsx';
 // import styles from './invoice.module.css';
 import MiniDrawer from '../../layout/drawer/drawer';
 const HomeInvoice = () => {
@@ -31,20 +31,25 @@ const HomeInvoice = () => {
   const handleDownload = () => {
     window.print();
   };
+
+  console.log(formData, 'the form data =======>');
   return (
     <MiniDrawer>
-        {showInvoice ? (
-            <PreviewInvoice formData={formData} setShowInvoice={setShowInvoice}  handleDownload={handleDownload}/>)
-             : (
-            <Invoice
-            formData={formData}
-            handleForm={handleForm}
-            showInvoice={showInvoice}
-            setShowInvoice={setShowInvoice}
-            handleDownload={handleDownload}
-            />)
-        }
-      
+      {showInvoice ? (
+        <PreviewInvoice
+          formData={formData}
+          setShowInvoice={setShowInvoice}
+          handleDownload={handleDownload}
+        />
+      ) : (
+        <Invoice
+          formData={formData}
+          handleForm={handleForm}
+          showInvoice={showInvoice}
+          setShowInvoice={setShowInvoice}
+          handleDownload={handleDownload}
+        />
+      )}
     </MiniDrawer>
   );
 };

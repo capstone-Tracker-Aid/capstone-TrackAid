@@ -31,7 +31,7 @@ const Routes = () =>
     },
     {
       path: '/invoice',
-      element: < HomeInvoice />,
+      element: <HomeInvoice />,
     },
   ]);
 export default Routes;
