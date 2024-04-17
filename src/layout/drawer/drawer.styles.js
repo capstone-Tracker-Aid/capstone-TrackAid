@@ -4,7 +4,7 @@ import { List } from '@mui/material';
 import { COLORS } from '../../style/theme';
 export const StyledList = styled(List)`
   text-decoration: none;
-  // color: ${COLORS.GREY_1};
+  color: ${COLORS.GREY_1};
 `;
 
 export const ContentLink = styled(List)`

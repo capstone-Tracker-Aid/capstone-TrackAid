@@ -120,98 +120,98 @@ export default function MiniDrawer({ children }) {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBar position="fixed" open={open}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{
-              marginRight: 5,
-              ...(open && { display: 'none' }),
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Stack
-            direction="row"
-            justifyContent="space-between"
-            sx={{ width: '100%' }}
-          >
-            <Typography variant="h6" noWrap component="div">
-              Tracker-Aid
-            </Typography>
-            <Box>
-              <Avatar
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <AppBar position="fixed" open={open}>
+          <Toolbar>
+            <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerOpen}
+                edge="start"
                 sx={{
-                  backgroundColor: `${COLORS.WHITE_1}`,
-                  color: `${COLORS.BLUE}`,
+                  marginRight: 5,
+                  ...(open && { display: 'none' }),
                 }}
-              >
-                {user.isAuthenticated &&
-                  `${user.currentUser.username[0].toUpperCase()}`}
-              </Avatar>
-            </Box>
-          </Stack>
-        </Toolbar>
-      </AppBar>
-      <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? (
-              <ChevronRightIcon />
-            ) : (
-              <ChevronLeftIcon />
-            )}
-          </IconButton>
-        </DrawerHeader>
-        <List>
-          {['Clients', 'Invoices'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-              <Link to={`/${text}`}>
-                <ListItemButton
-                  sx={{
-                    minHeight: 48,
-                    justifyContent: open ? 'initial' : 'center',
-                    px: 2.5,
-                  }}
-                >
-                  <ListItemIcon
+            >
+              <MenuIcon />
+            </IconButton>
+            <Stack
+                direction="row"
+                justifyContent="space-between"
+                sx={{ width: '100%' }}
+            >
+              <Typography variant="h6" noWrap component="div">
+                Tracker-Aid
+              </Typography>
+              <Box>
+                <Avatar
                     sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : 'auto',
-                      justifyContent: 'center',
+                      backgroundColor: `${COLORS.WHITE_1}`,
+                      color: `${COLORS.BLUE}`,
                     }}
-                  >
-                    {index % 2 === 0 ? <PeopleIcon /> : <ReceiptIcon />}
-                  </ListItemIcon>
+                >
+                  {user.isAuthenticated &&
+                      `${user.currentUser.username[0].toUpperCase()}`}
+                </Avatar>
+              </Box>
+            </Stack>
+          </Toolbar>
+        </AppBar>
+        <Drawer variant="permanent" open={open}>
+          <DrawerHeader>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === 'rtl' ? (
+                  <ChevronRightIcon />
+              ) : (
+                  <ChevronLeftIcon />
+              )}
+            </IconButton>
+          </DrawerHeader>
+          <List>
+            {['Clients', 'Invoices'].map((text, index) => (
+                <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+                  <Link to={`/${text}`}>
+                    <ListItemButton
+                        sx={{
+                          minHeight: 48,
+                          justifyContent: open ? 'initial' : 'center',
+                          px: 2.5,
+                        }}
+                    >
+                      <ListItemIcon
+                          sx={{
+                            minWidth: 0,
+                            mr: open ? 3 : 'auto',
+                            justifyContent: 'center',
+                          }}
+                      >
+                        {index % 2 === 0 ? <PeopleIcon /> : <ReceiptIcon />}
+                      </ListItemIcon>
 
-                  <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-                </ListItemButton>
-              </Link>
-            </ListItem>
-          ))}
-        </List>
-        <List>
-          <StyledList>
-            <ListItem onClick={handleLogout}>
-              <ContentLink>
-                <ListItemIcon>
-                  <LogoutIcon />
-                </ListItemIcon>
-                <ListItemText primary="Log Out" />
-              </ContentLink>
-            </ListItem>
-          </StyledList>
-        </List>
-      </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
-        {children}
+                      <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                    </ListItemButton>
+                  </Link>
+                </ListItem>
+            ))}
+          </List>
+          <List>
+            <StyledList>
+              <ListItem onClick={handleLogout}>
+                <ContentLink>
+                  <ListItemIcon>
+                    <LogoutIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Log Out" />
+                </ContentLink>
+              </ListItem>
+            </StyledList>
+          </List>
+        </Drawer>
+        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          <DrawerHeader />
+          {children}
+        </Box>
       </Box>
-    </Box>
   );
 }
